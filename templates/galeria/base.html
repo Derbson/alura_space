@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% include 'galeria/partials/_head.html' %}
+
+<body>
+    <div class="pagina-inicial">
+
+        {% include 'galeria/partials/_header.html' %}
+        
+        <main class="principal">
+            
+            {% include 'galeria/partials/_menu.html' %}
+            {% block content %}{% endblock  %}
+
+        </main>
+    </div>
+    <footer class="rodape">
+        {% include 'galeria/partials/_footer.html' %}
+    </footer>
+</body>
+
+</html>
