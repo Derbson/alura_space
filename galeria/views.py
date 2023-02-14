@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Fotografia
 
 def index(request):
-    fotografia = Fotografia.objects.all()
+    fotografia = Fotografia.objects.order_by("-id").filter(publicado=True)
     
     return render(request, 'galeria/index.html', {"cards": fotografia})
 
