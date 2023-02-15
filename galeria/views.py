@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Fotografia
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+    
     fotografia = Fotografia.objects.order_by("-id").filter(publicado=True)
     
     return render(request, 'galeria/index.html', {"cards": fotografia})
@@ -12,6 +15,8 @@ def imagem(request, foto_id):
 
 
 def buscar(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
     fotografia = Fotografia.objects.order_by("-id").filter(publicado=True)
 
     nome_a_buscar = request.GET['buscar']

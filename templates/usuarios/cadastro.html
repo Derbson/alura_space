@@ -4,17 +4,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-
-
 <body>
     <div class="pagina-inicial">
 
         <main class="principal">
-
             {% block content %}
             <section class="galeria" style="margin-left: 5em">
                 <form action="{% url 'cadastro' %}" method="POST">
-
                     {% csrf_token %}
                     <div class="row">
                         {% for field in form.visible_fields %}
@@ -27,11 +23,9 @@
                             <button class="btn btn-success col-12" style="padding: top 5px;" type="submit">Cadastrar</button>
                         </div>
                     </div>
-
                 </form>
             </section>
             {% endblock  %}
-
         </main>
     </div>
 </body>
