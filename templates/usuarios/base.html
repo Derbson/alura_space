@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% include "usuarios/partials/_head.html" %}
+
+<body>
+    <div class="pagina-inicial">
+        
+        {% include "usuarios/partials/_header.html" %}
+        
+        <main class="principal">
+            
+            {% include "usuarios/partials/_menu.html" %}
+
+            {% block content %}{% endblock  %}
+
+        </main>
+    </div>
+</body>
+
+{% include 'galeria/partials/_footer.html' %}
