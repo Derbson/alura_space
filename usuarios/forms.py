@@ -25,4 +25,54 @@ class LoginForms(forms.Form):
             }
         )
     )
+    
+    
+class CadastroForms(forms.Form):
+    nome_cadastro=forms.CharField(
+        label="Nome Completo",
+        required=True,
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ex.: João Silva",
+            }
+        )
+    )  
+    
+    email=forms.EmailField(
+        label="Email",
+        required=True,
+        max_length=70,
+        widget=forms.EmailInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ex.: joãosilva@xpto.com",
+            }
+        )
+    )  
+    
+    senha=forms.CharField(
+        label="Senha",
+        required=True,
+        max_length=15,
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Digite sua senha",
+            }
+        )
+    )
+    
+    confirm_senha=forms.CharField(
+        label="Comfirmação de Senha",
+        required=True,
+        max_length=15,
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Comfirme Senha",
+            }
+        )
+    )    
 
