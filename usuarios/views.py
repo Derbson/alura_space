@@ -37,30 +37,24 @@ def cadastro(request):
     
     if request.method == 'POST':
         form = CadastroForms(request.POST)
-        
-        if form["senha"].value() != form["confirm_senha"].value():
-            messages.error(request, "senhas não são iguais!")
-            return redirect("cadastro")
-        
-        nome=form["nome_cadastro"].value()
-        email=form["email"].value()
-        senha=form["senha"].value()
-        
-        if User.objects.filter(username=nome).exists():
-            messages.error(request, f"{nome} nome de usuário já existe!")
-            return redirect("cadastro")
-        
-        usuario = User.objects.create_user(
-            username=nome,
-            email=email,
-            password=senha,
-        )
-        usuario.save()
-        messages.success(request, f"{nome} usuário cadastrado com sucesso!")
-        return redirect("login")
-        
-    
-    
+        if form.is_valid():
+            nome=form["nome_cadastro"].value()
+            email=form["email"].value()
+            senha=form["senha"].value()
+            
+            if User.objects.filter(username=nome).exists():
+                messages.error(request, f"{nome} nome de usuário já existe!")
+                return redirect("cadastro")
+            
+            usuario = User.objects.create_user(
+                username=nome,
+                email=email,
+                password=senha,
+            )
+            usuario.save()
+            messages.success(request, f"{nome} usuário cadastrado com sucesso!")
+            return redirect("login")
+            
     return render(request, "usuarios/cadastro.html", {"form":form})
 
 

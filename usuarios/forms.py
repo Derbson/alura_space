@@ -1,4 +1,6 @@
 from django import forms
+from django.shortcuts import redirect
+
 
 
 class LoginForms(forms.Form):
@@ -74,15 +76,25 @@ class CadastroForms(forms.Form):
                 "placeholder": "Comfirme Senha",
             }
         )
-    ) 
+    )
     
     def clean_nome_cadastro(self):
-        nome = self.cleaned_data.get("nome_cadastro")
+        nome = self.cleaned_data.get('nome_cadastro')
         
         if nome:
             nome = nome.strip()
-            if " " in nome:
-                raise forms.ValidationError("Não é possivel inserir espaços dentro do campo nome")
+            if ' ' in nome:
+                raise forms.ValidationError("Espaços não são permitidos no campo nome")
             else:
                 return nome
+    
+    def clean_confirm_senha(self):
+        confirm_senha = self.cleaned_data.get("confirm_senha")
+        senha = self.cleaned_data.get("senha")
+        
+        if senha and confirm_senha:
+            if senha != confirm_senha:
+                raise forms.ValidationError("Senhas não condizem")
+            else:
+                return confirm_senha
 
